@@ -1,8 +1,7 @@
 void function(global) {
     const Meter = status => {
-        const self = this;
-        return new Meter.fn(this, status);
-    }
+        return new Meter.fn(status);
+    };
 
     Meter.prototype = {};
 
@@ -10,10 +9,27 @@ void function(global) {
      * Intialize prepaid meter
      */
     Meter.prototype.start = () => {
+        // change of status
         // get both pulse elements
+        const
+            led1 = document.getElementById('status1'),
+            led2 = document.getElementById('status2'),
+            display = document.getElementById('display');
+            
+        // console.log(self.status);
         // set both to a uniform color. specifically red
-        if (self.status === 'on')
-        setInterval(pulse, self.pulseInterval);
+        setTimeout(() => {
+            led1.style.fill = 'red';
+            led2.style.fill = 'red';
+            display.style.fill = '#a1d1ed';
+        }, 1500);
+
+        // start flashing LED if on
+        // if (self.status === 'on')
+            pulse({ el1: led1, el2: led2, el3: display });
+
+        if (self.status === 'off')
+            return;
     };
 
     /**
@@ -21,13 +37,14 @@ void function(global) {
      */
     Meter.prototype.update = () => {};
 
+    // private methods
     const
         /**
          * Flashing of the two LED lights on the meter
          * @param {obj} elements Array of elements to manipulate
          */
         pulse = (elements) => {
-            // 
+            // remove fill
         },
 
         /**
@@ -35,13 +52,15 @@ void function(global) {
          */
         display = () => {};
 
-    Meter.fn = (status) => {
+    /**
+     * Meter function constructor
+     * @param {string} status On/Off 
+     */
+    Meter.fn = function(status) {        
         const self = this;
-        self.status = status; // power status on | off
-        self.pulseInterval = 1000; // execute after every second
-        self.output = "- - - - - - - -"; // output at init
+        self.status = status || 'on'; // power status on | off
         self.button = { value: 0, label: '' }; // pressed | active button
-    }
+    };
 
     Meter.fn.prototype = Meter.prototype;
 
