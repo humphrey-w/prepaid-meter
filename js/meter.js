@@ -1,14 +1,14 @@
 void function(global) {
-    const Meter = status => {
-        return new Meter.fn(status);
+    const Meter = function() {
+        return new Meter.fn();
     };
 
     Meter.prototype = {};
 
     /**
-     * Intialize prepaid meter
+     * Turn on LEDs and display
      */
-    Meter.prototype.start = () => {
+    Meter.prototype.start = function() {
         // change of status
         // get both pulse elements
         const
@@ -25,17 +25,18 @@ void function(global) {
         }, 1500);
 
         // start flashing LED if on
-        // if (self.status === 'on')
-            pulse({ el1: led1, el2: led2, el3: display });
-
-        if (self.status === 'off')
-            return;
+        pulse({ el1: led1, el2: led2, el3: display });
     };
+
+    /**
+     * Turn off LEDs and display
+     */
+    Meter.prototype.stop = function() {};
 
     /**
      * Update the display after event 
      */
-    Meter.prototype.update = () => {};
+    Meter.prototype.update = function() {};
 
     // private methods
     const
@@ -43,22 +44,21 @@ void function(global) {
          * Flashing of the two LED lights on the meter
          * @param {obj} elements Array of elements to manipulate
          */
-        pulse = (elements) => {
+        pulse = function(elements) {
             // remove fill
         },
 
         /**
          * Output to the meter's display
          */
-        display = () => {};
+        display = function() {};
 
     /**
      * Meter function constructor
      * @param {string} status On/Off 
      */
-    Meter.fn = function(status) {        
+    Meter.fn = function() {        
         const self = this;
-        self.status = status || 'on'; // power status on | off
         self.button = { value: 0, label: '' }; // pressed | active button
     };
 
