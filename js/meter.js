@@ -18,6 +18,7 @@ void function(global) {
             
         // set both to a uniform color. specifically red
         setTimeout(() => {
+            beep(); // play start sound
             led1.style.fill = 'red';
             led2.style.fill = 'red';
             display.style.fill = '#A1D1ED';
@@ -44,7 +45,7 @@ void function(global) {
     // private methods
     const
         /**
-         * Flashing of the two LED lights on the meter
+         * Flashes the two LED lights on the meter
          * @param {obj} elements Array of elements to manipulate
          */
         pulse = function(elements) {
@@ -57,6 +58,14 @@ void function(global) {
                 el1.style.fill = "#EEEEEE";
                 el2.style.fill = "#EEEEEE";
             }, 10);
+        },
+
+        /**
+         * Plays a beep sound
+         */
+        beep = function() {
+            const audio = new Audio('../res/beep.mp3');
+            audio.play();
         },
 
         /**
