@@ -16,16 +16,19 @@ void function(global) {
             led2 = document.getElementById('status2'),
             display = document.getElementById('display');
             
-        // console.log(self.status);
         // set both to a uniform color. specifically red
         setTimeout(() => {
             led1.style.fill = 'red';
             led2.style.fill = 'red';
-            display.style.fill = '#a1d1ed';
-        }, 1500);
+            display.style.fill = '#A1D1ED';
 
-        // start flashing LED if on
-        pulse({ el1: led1, el2: led2, el3: display });
+            setTimeout(() => {
+                setInterval(() => {
+                    // start flashing leds
+                    pulse({ el1: led1, el2: led2, el3: display });
+                }, 1000);
+            }, 100);
+        }, 1000);
     };
 
     /**
@@ -45,7 +48,15 @@ void function(global) {
          * @param {obj} elements Array of elements to manipulate
          */
         pulse = function(elements) {
-            // remove fill
+            const { el1, el2, el3 } = elements;
+            // set blueish fill
+            el1.style.fill = "#86B8D8";
+            el2.style.fill = "#86B8D8";
+            // reset fill after a second
+            setTimeout(() => {
+                el1.style.fill = "#EEEEEE";
+                el2.style.fill = "#EEEEEE";
+            }, 10);
         },
 
         /**
