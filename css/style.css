@@ -2,9 +2,15 @@
    v2.0 | 20110126
    License: none (public domain)
 */
+@font-face {
+	font-family: 'Digital 7';
+	src: url('../fonts/digital-7.ttf');
+}
 :root {
 	--info: #00aad4;
 	--danger: #ff5555;
+	--text-fill: #999999;
+	--digital-font: 'Digital 7';
 }
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
@@ -66,4 +72,19 @@ svg {
 #controls,
 #button_text {
 	cursor: pointer;
+}
+#display_text tspan {
+	fill: var(--text-fill);
+	text-align: right;
+	font-family: var(--digital-font);
+}
+#display_text tspan#main {
+	font-size: 10px;
+}
+#display_text tspan#top {
+	font-size: 8px;
+}
+#display_text tspan#unit {
+	font-family: sans-serif;
+	font-size: 3px;
 }
